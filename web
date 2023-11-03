@@ -1,0 +1,96 @@
+#뉴스 기사 웹크롤링
+
+import requests
+from bs4 import BeautifulSoup
+
+
+header = {'User-agent' : 'Mozila/2.0}'}
+response = requests.get("https://news.naver.com/")
+html = response.text
+soup = BeautifulSoup(html, 'html.parser')
+titles = soup.select('.cjs_t')
+for title in titles:
+    print(title.text.strip())
+
+
+#날씨 정보(위치)
+
+from bs4 import BeautifulSoup
+import requests
+
+
+html = requests.get('https://search.naver.com/search.naver?query=구서동+날씨')
+address = soup.find('div', {'class': 'title_area _area_panel'}).find('h2', {'class': 'title'}).text
+
+
+
+#날씨 정보(기본 날씨 정보)
+
+from bs4 import BeautifulSoup
+import requests
+
+
+html = requests.get('https://search.naver.com/search.naver?query=구서동+날씨')
+weather_data = soup.find('div', {'class': 'weather_info'}).text
+
+
+
+#날씨 정보 (기온만)
+from bs4 import BeautifulSoup
+import requests
+
+
+html = requests.get('https://search.naver.com/search.naver?query=구서동+날씨')
+weatherstatus = soup.find('div', {'class': 'weather_info'}).find('div', {'class': 'temperature_text'}).text
+print(weatherstatus)
+
+
+
+
+
+#OPGG 인기글
+
+from bs4 import BeautifulSoup
+import requests
+
+
+html = requests.get('https://www.op.gg/')
+opggtalk = soup.find('div', {'class': 'title-container'}).text
+print(opggtalk)
+
+
+
+
+
+
+
+
+
+
+
+
+#오늘의 명언
+
+
+from bs4 import BeautifulSoup
+import requests
+
+
+html = requests.get('https://search.naver.com/search.naver?query=오늘의+명언')
+wisesaying = soup.find('div', {'class': 'stnbx'}).find('p', {'class': 'lngkr'}).text
+print(wisesaying)
+
+
+
+
+#별자리 운세
+
+from bs4 import BeautifulSoup
+import requests
+
+
+html = requests.get('https://search.naver.com/search.naver?query=별자리+운세')
+stargood = soup.find('div', {'class': 'api_cs_wrap'}).find('li', {'class': 'lst_r'}).text
+print(stargood)
+
+
